@@ -14,62 +14,35 @@ SSPapp::~SSPapp()
 }
 void SSPapp::processQueries()
 {
-	int vibecheck = 0;
-	string input;
-	int nameNum = 0;
-	int edgeNum = 0;
-	int vertNum;
 	int edgeTotal;
-	string t;
-	string f;
+	int vertTotal;
+	int count = 0;
 	int w;
-	while( cin >> input)
+	string vertName;
+	string from;
+	string to;
+	cin >> vertTotal;
+	while( count < vertTotal )
 	{
-		if( input == "quit" )
-		{
-			return;
-		}
-		if(vibecheck == 0)//num of vertices
-		{
-			vertNum = std::stoi(input);
-			vibecheck++;
-		}
-		if(vibecheck == 1)//alphanumeric vertex identifiers
-		{
-			while( nameNum < vertNum )
-			{
-				cin >> input;
-				myGraph.addVertex(input);
-				nameNum++;
-			}
-			vibecheck++;
-		}
-		if(vibecheck == 2)//num of edges
-		{
-			edgeTotal = std::stoi(input);
-			vibecheck++;
-		}
-		if(vibecheck == 3)//list of edges [vert vert len]
-		{
-			while( edgeNum < edgeTotal )
-			{
-				cin >> f;
-				cin >> t;
-				cin >> w;
-				myGraph.addEdge(f,t,w);
-				edgeNum++;
-			}
-			vibecheck++;
-		}
-		if(vibecheck > 3)// List of queries
-		{
-			string to;
-			string from;
-			cin >> from;
-			cin >> to;
-			std::cout << myGraph.getShortestPath(from, to) << std::endl;
-			vibecheck++;
-		}
+		cin >> vertName;
+		count++;
+		myGraph.addVertex(vertName);
+	}
+	cin.ignore();
+	count = 0;
+	cin >> edgeTotal;
+	while( count < edgeTotal )
+	{
+		cin >> from;
+		cin >> to;
+		cin >> w;
+		cin.ignore();
+		myGraph.addEdge(from, to, w);
+	}
+	while( cin >> from && from != "quit" )
+	{
+		cin >> to;
+		myGraph.getShortestPath(from, to);
 	}
 	return;
 }
