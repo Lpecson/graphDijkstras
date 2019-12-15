@@ -4,6 +4,8 @@
 #include<iostream>
 using std::string;
 using std::cin;
+using std::cout;
+using std::endl;
 SSPapp::SSPapp()
 {
 	
@@ -42,7 +44,7 @@ void SSPapp::processQueries()
 	while( cin >> from && from != "quit" )
 	{
 		cin >> to;
-		myGraph.getShortestPath(from, to);
+		cout << myGraph.getShortestPath(from, to) << endl;
 	}
 	return;
 }
